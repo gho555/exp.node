@@ -6,6 +6,7 @@ const cluster = require('cluster');
 const os = require('os');
 const process = require('process');
 const app = require('express')();
+const zlib = require('zlib');
 
 ////////////////////////////////////////////fs///////////////////////////////////////////////////////////////////////////////
 
@@ -81,28 +82,37 @@ const app = require('express')();
 // cluster.isMaster;
 
 ////////////////////////////////////////////crypto///////////////////////////////////////////////////////////////////////////////
-const numCpu = os.cpus().length;
-console.log('numCpu:' + numCpu);
+// const numCpu = os.cpus().length;
+// console.log('numCpu:' + numCpu);
 
-app.get('/', (req, res) => {
-  for (let i = 0; i < ie8; i++) {
-    //a infinitive loop for execute log process
-  }
-  res.send(`ok...${process.pid}`);
-});
+// app.get('/', (req, res) => {
+//   for (let i = 0; i < ie8; i++) {
+//     //a infinitive loop for execute log process
+//   }
+//   res.send(`ok...${process.pid}`);
+// });
 
-if (cluster.isMaster) {
-  for (let i = 0; i < numCpu; i++) {
-    cluster.fork();
-  }
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(
-      `worker ${worker.process.pid} code ${code} signal ${signal} died`,
-    );
-    cluster.fork();
-  });
-} else {
-  app.listen(3000, () =>
-    console.log(`running server ${process.pid} on 127.0.0.1:8000`),
-  );
-}
+// if (cluster.isMaster) {
+//   for (let i = 0; i < numCpu; i++) {
+//     cluster.fork();
+//   }
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.log(
+//       `worker ${worker.process.pid} code ${code} signal ${signal} died`,
+//     );
+//     cluster.fork();
+//   });
+// } else {
+//   app.listen(3000, () => 
+//     console.log(`running server ${process.pid} on 127.0.0.1:8000`),
+//   );
+// }
+
+////////////////////////////////////////////zlib///////////////////////////////////////////////////////////////////////////////
+// const gzip = zlib.createGzip();
+// const unzip = zlib.createUnzip();
+// const inp = fs.createReadStream('index.js.zip');
+// const out = fs.createWriteStream('index2.js');
+// // inp.pipe(gzip).pipe(out);
+
+// inp.pipe(unzip).pipe(out);
