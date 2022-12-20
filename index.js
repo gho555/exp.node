@@ -3,6 +3,7 @@ const http = require('http');
 const url = require('url');
 const crypto = require('crypto');
 const cluster = require('cluster');
+const path = require('path');
 const os = require('os');
 const process = require('process');
 const app = require('express')();
@@ -110,8 +111,9 @@ const zlib = require('zlib');
 
 // const totalMemory = os.totalmem();
 // const freeMemory = os.freemem();
-const data = os.homedir();
-console.log(data);
+// const data = os.homedir();
+// console.log(data);
+
 ////////////////////////////////////////////zlib///////////////////////////////////////////////////////////////////////////////
 // const gzip = zlib.createGzip();
 // const unzip = zlib.createUnzip();
@@ -120,3 +122,7 @@ console.log(data);
 // // inp.pipe(gzip).pipe(out);
 
 // inp.pipe(unzip).pipe(out);
+
+////////////////////////////////////////////path///////////////////////////////////////////////////////////////////////////////
+const pathObj = path.parse(__filename);
+console.log(pathObj.base);
