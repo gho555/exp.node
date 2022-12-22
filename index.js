@@ -125,8 +125,8 @@ const assert = require('assert');
 // inp.pipe(unzip).pipe(out);
 
 ////////////////////////////////////////////path///////////////////////////////////////////////////////////////////////////////
-const pathObj = path.parse(__filename);
-console.log(pathObj.base);
+// const pathObj = path.parse(__filename);
+// console.log(pathObj.base);
 
 ////////////////////////////////////////////assert///////////////////////////////////////////////////////////////////////////////
 // function add(a, b) {
@@ -148,16 +148,27 @@ console.log(pathObj.base);
 
 // assert(50 - 50);
 
-const a = {
-  person: {
-    name: 'alireza',
-  },
-};
+// const a = {
+//   person: {
+//     name: 'alireza',
+//   },
+// };
 
-const b = {
-  person: {
-    name: 'alreza',
-  },
-};
+// const b = {
+//   person: {
+//     name: 'alreza',
+//   },
+// };
 
-assert.notDeepEqual(a, b, 'not deep equal');
+// assert.notDeepEqual(a, b, 'not deep equal');
+
+////////////////////////////////////////////assert///////////////////////////////////////////////////////////////////////////////
+// const buf = Buffer.from('abc');
+const buf1 = Buffer.alloc(17);
+const buf2 = Buffer.alloc(16);
+// const buf = Buffer.allocUnsafe(15);
+// const buf = Buffer.allocUnsafeSlow(15);
+// const byt = Buffer.byteLength(buf);
+
+console.log(Buffer.compare(buf1, buf2));
+// console.log(byt);
