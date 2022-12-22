@@ -129,9 +129,35 @@ const pathObj = path.parse(__filename);
 console.log(pathObj.base);
 
 ////////////////////////////////////////////assert///////////////////////////////////////////////////////////////////////////////
-function add(a, b) {
-  return a + b;
-}
+// function add(a, b) {
+//   return a + b;
+// }
 
-var expected = add(1, 2);
-assert.equal(expected, 3, 'one plus two is three');
+// function bigger(a, b) {
+//   return a > b;
+// }
+
+// var expected = add(1, 2);
+// var bigger = bigger(2, 1);
+// assert.equal(expected, 3, 'one plus two is three');
+// assert(bigger);
+
+// assert(2 < 1, 'two should be bigger than one');
+
+// assert(50 > 70, 'My message goes here');
+
+// assert(50 - 50);
+
+const a = {
+  person: {
+    name: 'alireza',
+  },
+};
+
+const b = {
+  person: {
+    name: 'alreza',
+  },
+};
+
+assert.notDeepEqual(a, b, 'not deep equal');
