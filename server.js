@@ -1,15 +1,18 @@
 const http = require('http');
 const url = require('url');
+var querystring = require('querystring');
 
 const server = http.createServer((req, res) => {
-  const { method } = req;
-  const { query, pathName } = url.parse(req.url, true);
+  const { url: reqUrl, method } = req;
+  const { search, query, pathname } = url.parse(reqUrl, true);
+  const { name } = query;
+  console.log('name', name);
   console.log({
     method: method,
     query: query,
-    pathName: pathName,
+    pathName: pathname,
   });
-  res.end();
+  res.end('ok');
 });
 
 server.listen(8080, () => {
