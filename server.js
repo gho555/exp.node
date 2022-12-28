@@ -34,7 +34,7 @@ const server = http.createServer((req, res) => {
 
   //take a parameter from query
   const { name } = query;
-  
+
   //take value form req.params
   const { nameReq } = params;
 
