@@ -4,8 +4,17 @@ var querystring = require('querystring');
 
 const server = http.createServer((req, res) => {
   // take url and method req
-  const { url: urlPath, method } = req;
- 
+  const {
+    path: pathReq,
+    query: queryReq,
+    url: urlReq,
+    xhr,
+    params,
+    method,
+    headers,
+    accepted,
+  } = req;
+
   // url.parse
   const {
     query,
@@ -20,10 +29,14 @@ const server = http.createServer((req, res) => {
     pathname,
     path,
     href,
-  } = url.parse(urlPath, true);
+    cookies,
+  } = url.parse(urlReq, true);
 
   //take a parameter from query
   const { name } = query;
+  
+  //take value form req.params
+  const { nameReq } = params;
 
   //set header
   res.writeHead(404, {
@@ -36,7 +49,8 @@ const server = http.createServer((req, res) => {
     JSON.stringify({
       method,
       query,
-      urlPath,
+      queryReq,
+      urlReq,
       protocol,
       slashes,
       auth,
@@ -48,8 +62,14 @@ const server = http.createServer((req, res) => {
       query,
       pathname,
       path,
+      pathReq,
       href,
       name,
+      xhr,
+      nameReq,
+      cookies,
+      accepted,
+      headers,
     }),
   );
 });
