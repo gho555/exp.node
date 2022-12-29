@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/babaie774/node.exp/issues"
   },
-  "homepage": "https://github.com/babaie774/node.exp#readme"
+  "homepage": "https://github.com/babaie774/node.exp#readme",
+  "dependencies": {
+    "mongodb": "^4.13.0"
+  }
 }

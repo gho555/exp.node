@@ -1,8 +1,8 @@
 const http = require('http');
-const url = require('url');
-var querystring = require('querystring');
-
+// const url = require('url');
+const { URL } = require('url');
 const server = http.createServer((req, res) => {
+  ////////////////////////////////*.req.*//////////////////////////////////////
   // take url and method req
   const {
     path: pathReq,
@@ -16,32 +16,40 @@ const server = http.createServer((req, res) => {
   } = req;
 
   // url.parse
-  const {
-    query,
-    protocol,
-    slashes,
-    auth,
-    host,
-    port,
-    hostname,
-    hash,
-    search,
-    pathname,
-    path,
-    href,
-    cookies,
-  } = url.parse(urlReq, true);
+  // const {
+  //   query,
+  //   protocol,
+  //   slashes,
+  //   auth,
+  //   host,
+  //   port,
+  //   hostname,
+  //   hash,
+  //   search,
+  //   pathname,
+  //   path,
+  //   href,
+  //   cookies,
+  // } = url.parse(urlReq, true);
+
+  const objUrl = new URL(urlReq);
+
+  console.log(objUrl);
 
   //take a parameter from query
-  const { name } = query;
+  const { name, family } = query;
 
-  //take value form req.params
-  const { nameReq } = params;
-
+  ////////////////////////////////*.res.*//////////////////////////////////////
   //set header
   res.writeHead(404, {
     'Content-type': 'text/json',
     'my-own-header': 'hello world',
+  });
+
+  // log data sended from query
+  console.log({
+    name,
+    family,
   });
 
   //send result
@@ -56,6 +64,7 @@ const server = http.createServer((req, res) => {
       auth,
       host,
       port,
+      params,
       hostname,
       hash,
       search,
@@ -66,7 +75,6 @@ const server = http.createServer((req, res) => {
       href,
       name,
       xhr,
-      nameReq,
       cookies,
       accepted,
       headers,
@@ -74,6 +82,7 @@ const server = http.createServer((req, res) => {
   );
 });
 
+///////////////////////////////////.run.server/////////////////////////////////////////////
 server.listen(8080, () => {
   console.log(`server running on 8080`);
 });
