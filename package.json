@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/babaie774/node.exp#readme",
   "dependencies": {
+    "base64url": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.13.0"
   }
 }
