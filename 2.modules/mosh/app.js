@@ -1,16 +1,9 @@
-const EventEmitter = require('events');
-const emitter = new EventEmitter();
-const log = require('./logger');
+const { Logger } = require('./path');
 
-// log('hi');
+const logger = new Logger();
 
-console.log(log);
-
-emitter.on('massageLogged', (e) => {
-  //   console.log(e);
+logger.on('log', (arg) => {
+  console.log(arg);
 });
 
-emitter.emit('massageLogged', {
-  id: 1,
-  url: 'http://',
-});
+logger.log('logged');

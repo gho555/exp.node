@@ -1,18 +1,10 @@
-const os = require('os');
-const fs = require('fs');
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
 
-const info = os.arch();
-const totalmem = os.totalmem();
-const freemem = os.freemem();
+class Logger extends EventEmitter {
+  log(arg) {
+    this.emit('log', arg);
+  }
+}
 
-const readDirFiles = fs.readdirSync('./');
-const readDirFilesSync = fs.readdirSync('./');
-fs.readdir('./', (err, files) => {
-  console.log(files);
-});
-console.log(readDirFiles);
-
-console.log({
-  totalmem,
-  freemem,
-});
+module.exports.Logger = Logger;
