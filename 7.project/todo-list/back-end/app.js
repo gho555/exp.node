@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const express = require('express');
-const app = express();
+const app = express();git 
 
 let todos = [
   {
@@ -16,57 +16,61 @@ app.get('/', (req, res) => {
   res.status(200).send('Hello World');
 });
 
-app.get('/api/getTodos', (req, res) => {
+app.get('/api/todos', (req, res) => {
   res.status(200).send(todos);
 });
 
-app.get('/api/getTodos/:id,', (req, res) => {
+app.get('/api/todos/:id', (req, res) => {
   console.log(req.query);
   console.log(req.params);
   const selectedTodos = todos.filter(
-    (todo) => todo.id === parseInt(req.query.id),
+    (todo) => todo.id === parseInt(req.params.id),
   );
   res.status(200).send(selectedTodos);
 });
 
-app.post('/api/getTodos,', (req, res) => {
-  if (validateTodo(req.body).error) {
-    res.status(400).send(validateTodo(req.body).error);
-  }
+app.post('/api/todos', (req, res) => {
+  //   const result = validateTodo(req);
+  //   if (result.error) {
+  //     res.status(400).send(result.error);
+  //   }
   const course = {
     id: todos.length + 1,
-    name: req.body.name,
+    title: req.body.title,
     status: 'PENDING',
   };
 
-  todos = {
-    ...todos,
-    course,
-  };
+  todos = todos.concat(course);
 
   res.status(200).send(todos);
 });
 
-app.put('/api/getTodos/:id,', (req, res) => {
-  console.log(req.params.id);
-  const selectedTodos = todos.filter(
-    (todo) => todo.id === parseInt(req.params.id),
+app.put('/api/todos', (req, res) => {
+  const selectedTodosIndex = todos.findIndex(
+    (todo) => todo.id === parseInt(req.body.id),
   );
 
-  if (validateTodo(req.body).error) {
-    res.status(400).send(validateTodo(req.body).error);
+  //   if (validateTodo(req.body).error) {
+  //     res.status(400).send(validateTodo(req.body).error);
+  //   }
+
+  const todosCopy = [...todos];
+  const selectedTodo = todosCopy[selectedTodosIndex];
+
+  if (selectedTodo) {
+    selectedTodo.id = req.body.id;
+    selectedTodo.title = req.body.title;
+    selectedTodo.status = req.body.status;
   }
 
-  const course = req.body;
+  todos = todosCopy;
 
-  todos = {
-    ...todos,
-    course,
-  };
+  console.log(todos);
+
   res.status(200).send(todos);
 });
 
-app.delete('/api/getTodos/:id,', (req, res) => {
+app.delete('/api/todos/:id', (req, res) => {
   console.log(req.params.id);
   const selectedTodosIndex = todos.findIndex(
     (todo) => todo.id === parseInt(req.params.id),
@@ -76,16 +80,16 @@ app.delete('/api/getTodos/:id,', (req, res) => {
     res.status(404).send('todo not found');
   }
 
-  const slicedTodos = todos.slice(selectedTodosIndex, 1);
-  res.status(200).send(slicedTodos);
+  todos = todos.slice(selectedTodosIndex, 1);
+  res.status(200).send(todos);
 });
 
-const validateTodo = (reqBody) => {
+const validateTodo = (req) => {
   const schemas = {
-    name: Joi.String().min(1).required(),
+    name: Joi.string().min(1).required(),
   };
 
-  return (result = Joi.validate(reqBody, schemas));
+  return Joi.validate(req, schemas);
 };
 
 app.listen(5000, () => {
