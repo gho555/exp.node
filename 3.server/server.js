@@ -15,29 +15,33 @@ const server = http.createServer((req, res) => {
     accepted,
   } = req;
 
+  const url = new URL(urlReq, `http://${req.headers.host}`);
+
+
   // url.parse
-  // const {
-  //   query,
-  //   protocol,
-  //   slashes,
-  //   auth,
-  //   host,
-  //   port,
-  //   hostname,
-  //   hash,
-  //   search,
-  //   pathname,
-  //   path,
-  //   href,
-  //   cookies,
-  // } = url.parse(urlReq, true);
+  const {
+    query,
+    protocol,
+    slashes,
+    auth,
+    host,
+    port,
+    hostname,
+    hash,
+    search,
+    pathname,
+    path,
+    href,
+    cookies,
+  } = url;
 
-  const objUrl = new URL(urlReq);
+  // const objUrl = new URL(urlReq);
 
-  console.log(objUrl);
+  // console.log(objUrl);
 
   //take a parameter from query
-  const { name, family } = query;
+  const name = query?.name;
+  const family = query?.family;
 
   ////////////////////////////////*.res.*//////////////////////////////////////
   //set header
@@ -47,12 +51,12 @@ const server = http.createServer((req, res) => {
   });
 
   // log data sended from query
-  console.log({
-    name,
-    family,
-  });
+  // console.log({
+  //   name,
+  //   family,
+  // });
 
-  //send result
+  // //send result
   res.end(
     JSON.stringify({
       method,
@@ -74,6 +78,7 @@ const server = http.createServer((req, res) => {
       pathReq,
       href,
       name,
+      family,
       xhr,
       cookies,
       accepted,
